@@ -1,18 +1,15 @@
-input.onPinPressed(TouchPin.P0, function () {
-    y += 1
-})
 input.onButtonPressed(Button.A, function () {
-    x += -1
+    led.unplot(x, y)
+    x += randint(-1, 1)
 })
 input.onButtonPressed(Button.AB, function () {
-    x = 2
-    y = 2
+    led.unplot(x, y)
+    x = 0
+    y = 0
 })
 input.onButtonPressed(Button.B, function () {
-    x += 1
-})
-input.onPinPressed(TouchPin.P1, function () {
-    y += -1
+    led.unplot(x, y)
+    y += randint(-1, 1)
 })
 let y = 0
 let x = 0
@@ -63,8 +60,41 @@ basic.showLeds(`
     . . . . .
     . . . . .
     `)
-x = 2
-y = 2
-loops.everyInterval(100, function () {
+x = 0
+y = 0
+loops.everyInterval(1, function () {
     led.plot(x, y)
+})
+basic.forever(function () {
+    if (x < 0) {
+        x = 0
+    }
+    if (x > 4) {
+        x = 4
+    }
+    if (y < 0) {
+        y = 0
+    }
+    if (y > 4) {
+        y = 4
+    }
+    if (led.point(4, 4)) {
+        basic.clearScreen()
+        basic.showLeds(`
+            . . . . .
+            . . . . .
+            . . # . .
+            . . . . .
+            . . . . .
+            `)
+        basic.pause(100)
+        basic.showIcon(IconNames.SmallDiamond)
+        basic.pause(100)
+        basic.showIcon(IconNames.Target)
+        basic.pause(100)
+        basic.showIcon(IconNames.Diamond)
+        basic.pause(100)
+        basic.showString("GOAL!!")
+        basic.clearScreen()
+    }
 })
