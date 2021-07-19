@@ -1,6 +1,6 @@
 {
     "name": "NITOK_R03_DELIVERY_microbit",
-    "version": "2.0.0",
+    "version": "2.1.0",
     "description": "",
     "dependencies": {
         "core": "*",
