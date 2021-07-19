@@ -1,6 +1,6 @@
 input.onButtonPressed(Button.A, function () {
     led.unplot(x, y)
-    x += randint(-1, 1)
+    x += -1
 })
 input.onButtonPressed(Button.AB, function () {
     led.unplot(x, y)
@@ -9,7 +9,7 @@ input.onButtonPressed(Button.AB, function () {
 })
 input.onButtonPressed(Button.B, function () {
     led.unplot(x, y)
-    y += randint(-1, 1)
+    x += 1
 })
 let iy = 0
 let ix = 0
@@ -63,13 +63,7 @@ basic.showLeds(`
     . . . . .
     `)
 x = 0
-y = 0
-loops.everyInterval(10000, function () {
-    led.unplot(ix, iy)
-    iy = randint(0, 4)
-    iy = randint(0, 4)
-    led.plotBrightness(ix, iy, 32)
-})
+y = -1
 loops.everyInterval(1, function () {
     led.plot(x, y)
     if (x < 0) {
@@ -77,12 +71,6 @@ loops.everyInterval(1, function () {
     }
     if (x > 4) {
         x = 4
-    }
-    if (y < 0) {
-        y = 0
-    }
-    if (y > 4) {
-        y = 4
     }
     if (x == ix && y == iy) {
         led.unplot(x, y)
@@ -120,4 +108,33 @@ loops.everyInterval(1, function () {
         x = 0
         y = 0
     }
+})
+loops.everyInterval(20000, function () {
+    if (y != 4) {
+        led.unplot(x, y)
+        y += 1
+    }
+})
+loops.everyInterval(randint(1000, 5000), function () {
+    led.unplot(ix, iy)
+    if (randint(0, 2) == 0) {
+        ix = randint(x + 2, x - 2)
+        iy = randint(y + 1, y - 1)
+    } else {
+        ix += randint(-1, 1)
+        iy += randint(-1, 1)
+    }
+    if (ix < 0) {
+        ix = 0
+    }
+    if (iy < 0) {
+        iy = 0
+    }
+    if (ix > 4) {
+        ix = 4
+    }
+    if (iy > 4) {
+        iy = 4
+    }
+    led.plotBrightness(ix, iy, 32)
 })
