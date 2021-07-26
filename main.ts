@@ -15,7 +15,6 @@ let iy = 0
 let ix = 0
 let y = 0
 let x = 0
-music.startMelody(music.builtInMelody(Melodies.Nyan), MelodyOptions.OnceInBackground)
 basic.showLeds(`
     # # # # #
     . . . . .
